@@ -6,8 +6,10 @@ public class PlayerController : MonoBehaviour {
     Grid GridReference;//For referencing the grid class
     public Transform StartPosition;//Starting position to pathfind from
     public Transform TargetPosition;//Starting position to pathfind to
-    public GameObject avatar;
-    public float speed;
+    public float maxSpeed;
+    public float minSpeed;
+    public float currentSpeed;
+    float speedMod = 0;
 
     private void Awake()//When the program starts
     {
@@ -76,140 +78,41 @@ public class PlayerController : MonoBehaviour {
 
     void GetFinalPath(Node a_StartingNode, Node a_EndNode)
     {
-        List<Node> FinalPath = new List<Node>();//List to hold the path sequentially 
-        Node CurrentNode = a_EndNode;//Node to store the current node being checked
+        List<Node> FinalPath = new List<Node>(); 
+        Node CurrentNode = a_EndNode;
 
-        while(CurrentNode != a_StartingNode)//While loop to work through each node going through the parents to the beginning of the path
+        while(CurrentNode != a_StartingNode)
         {
-            FinalPath.Add(CurrentNode);//Add that node to the final path
-            CurrentNode = CurrentNode.ParentNode;//Move onto its parent node
+            FinalPath.Add(CurrentNode);
+            CurrentNode = CurrentNode.ParentNode;
         }
 
-        FinalPath.Reverse();//Reverse the path to get the correct order
+        FinalPath.Reverse();
 
-        GridReference.FinalPath = FinalPath;//Set the final path
+        GridReference.FinalPath = FinalPath;
 
     }
 
     int GetManhattenDistance(Node a_nodeA, Node a_nodeB)
     {
-        int ix = Mathf.Abs(a_nodeA.iGridX - a_nodeB.iGridX);//x1-x2
-        int iy = Mathf.Abs(a_nodeA.iGridY - a_nodeB.iGridY);//y1-y2
+        int ix = Mathf.Abs(a_nodeA.iGridX - a_nodeB.iGridX);
+        int iy = Mathf.Abs(a_nodeA.iGridY - a_nodeB.iGridY);
 
         return ix + iy;//Return the sum
     }
 
     void MoveToTarget()
     {
-        print("gridpoints in final path " + GridReference.FinalPath.Count);
+        //print("gridpoints in final path " + GridReference.FinalPath.Count + ", " + currentSpeed);
         if (GridReference.FinalPath.Count > 0){
-            float step = speed * Time.deltaTime;
-            avatar.transform.position = Vector2.Lerp(avatar.transform.position, GridReference.FinalPath[0].vPosition, step);
+            if (Input.GetMouseButtonDown(0)){
+                speedMod = Vector2.Distance(StartPosition.position, TargetPosition.position);   
+                print("speedmod " + speedMod);
+            }
+            currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, Vector2.Distance(StartPosition.position, TargetPosition.position) / (speedMod*2));
+            print("current speed " + currentSpeed);
+            float step = currentSpeed * Time.deltaTime;
+            StartPosition.position = Vector2.MoveTowards(StartPosition.position, GridReference.FinalPath[0].vPosition, step);
         }
     }
 }
-/*
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerController : MonoBehaviour
-{
-    Grid grid;
-    public Transform startPosition;
-    public Transform targetPosition;
-    bool moving = false;
-
-    // Awake is called at the start of the program
-    private void Awake()
-    {
-        grid = GetComponent<Grid>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        MovementPointClick(startPosition.position, targetPosition.position);
-    }
-
-    void MovementPointClick(Vector3 a_startPosition, Vector3 a_targetPosition)
-    {
-        Node startNode = grid.NodeFromWorldPosition(a_startPosition);
-        Node targetNode = grid.NodeFromWorldPosition(a_targetPosition);
-
-        List<Node> OpenList = new List<Node>();
-        HashSet<Node> ClosedList = new HashSet<Node>();
-
-        OpenList.Add(startNode);
-
-        while (OpenList.Count > 0){
-            Node currentNode = OpenList[0];
-            for (int i = 0; i < OpenList.Count; i++){
-                if (OpenList[i].FCost < currentNode.FCost || OpenList[i].FCost == currentNode.FCost && OpenList[i].hCost < currentNode.hCost){
-                    currentNode = OpenList[i];
-                }
-            }
-            OpenList.Remove(currentNode);
-            ClosedList.Add(currentNode);
-
-            if (currentNode == targetNode){
-                GetFinalPath(startNode, targetNode);
-            }
-
-            foreach (Node NeighborNode in grid.GetNeighborNodes(currentNode)){
-                if (!NeighborNode.isWall || ClosedList.Contains(NeighborNode)){
-                    continue;
-                }
-                int MoveCost = currentNode.gCost + GetManhattanDistance(currentNode, NeighborNode);
-
-                if (MoveCost < NeighborNode.gCost || !OpenList.Contains(NeighborNode)){
-                    NeighborNode.gCost = MoveCost;
-                    NeighborNode.hCost = GetManhattanDistance(NeighborNode, targetNode);
-                    NeighborNode.parent = currentNode;
-
-                    if (!OpenList.Contains(NeighborNode)){
-                        OpenList.Add(NeighborNode);
-                    }
-                }
-            }
-            print("open nodes " + OpenList.Count + ", current node " + currentNode.position + ", target node " + targetNode.position);
-        }
-
-        /*
-        var click = Input.GetButtonDown("TargetPoint");
-        if(click == true){
-            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            moving = true;
-        }
-
-        if(moving && (Vector2)transform.position != targetPosition){
-            float step = speed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
-        } else {
-            moving = false;
-        }
-        
-    }
-
-    void GetFinalPath(Node a_startNode, Node a_endNode){
-        List<Node> finalPath = new List<Node>();
-        Node currentNode = a_endNode;
-
-        while (currentNode != a_startNode){
-            finalPath.Add(currentNode);
-            currentNode = currentNode.parent;
-        }
-
-        finalPath.Reverse();
-        print("final path");
-        grid.FinalPath = finalPath;
-    }
-
-    int GetManhattanDistance(Node a_nodeA, Node a_nodeB){
-        int ix = Mathf.Abs(a_nodeA.gridX - a_nodeB.gridX);
-        int iy = Mathf.Abs(a_nodeA.gridY - a_nodeB.gridY);
-
-        return ix + iy;
-    }
-}
-*/

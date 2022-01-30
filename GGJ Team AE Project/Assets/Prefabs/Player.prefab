@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751641138979021261}
-  - component: {fileID: 751641138979021248}
+  - component: {fileID: 971019500137088039}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -183,7 +183,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &751641138979021248
+--- !u!58 &971019500137088039
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
