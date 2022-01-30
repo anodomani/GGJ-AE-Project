@@ -5,17 +5,26 @@ using UnityEngine;
 public class MoveTarget : MonoBehaviour
 {
     public LayerMask hitLayers;
+    public GameObject pointer;
+    SpriteRenderer pointerSprite;
+
+    void Awake()
+    {
+        pointerSprite = pointer.GetComponent<SpriteRenderer>();
+    }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))//If the player has left clicked
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mouse = Input.mousePosition;//Get the mouse Position
-            Ray castPoint = Camera.main.ScreenPointToRay(mouse);//Cast a ray to get where the mouse is pointing at
-            RaycastHit hit;//Stores the position where the ray hit.
-            if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, hitLayers))//If the raycast doesnt hit a wall
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Collider2D isWall = Physics2D.OverlapCircle(worldPosition, 1f, hitLayers);
+            if (!isWall)
             {
-                this.transform.position = hit.point;//Move the target to the mouse position
+                print("new target at: " + worldPosition);
+                this.transform.position = new Vector3(worldPosition.x, worldPosition.y, 0);
+                pointerSprite.color = new Color(pointerSprite.color.r, pointerSprite.color.g, pointerSprite.color.b, 105);
             }
         }
+        pointerSprite.color = new Color(pointerSprite.color.r, pointerSprite.color.g, pointerSprite.color.b, pointerSprite.color.a - 1);
     }
 }

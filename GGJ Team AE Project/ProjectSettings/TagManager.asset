@@ -41,12 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Characters
-    uniqueID: 3233471647
-    locked: 0
-  - name: Infront
-    uniqueID: 1418747727
-    locked: 0
-  - name: Player
-    uniqueID: 2411289467
+  - name: Overlay
+    uniqueID: 2993378053
     locked: 0
