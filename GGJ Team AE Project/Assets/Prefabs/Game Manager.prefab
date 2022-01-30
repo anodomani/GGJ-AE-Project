@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7590684844817732976}
   - component: {fileID: 7590684844817732977}
   - component: {fileID: 7590684844817732979}
+  - component: {fileID: 1716051472}
+  - component: {fileID: 1716051476}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -50,7 +52,7 @@ MonoBehaviour:
     m_Bits: 256
   vGridWorldSize: {x: 150, y: 150}
   fNodeRadius: 2
-  fDistanceBetweenNodes: 0.5
+  fDistanceBetweenNodes: 0
 --- !u!114 &7590684844817732979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,5 +67,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPosition: {fileID: 0}
   TargetPosition: {fileID: 0}
-  avatar: {fileID: 0}
-  speed: 10
+  maxSpeed: 30
+  minSpeed: 2
+  currentSpeed: 0
+--- !u!114 &1716051472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590684844817732982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1537bc534b5e3544c9e816fd1022e9e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooFarAway: {fileID: 0}
+  player:
+    serializedVersion: 2
+    m_Bits: 1024
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  dialogueTitle: {fileID: 0}
+  dialogueBody: {fileID: 0}
+  dialogueFull: {fileID: 0}
+--- !u!114 &1716051476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590684844817732982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 818410a6d875d164685e8a20a2d095b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 768
+  pointer: {fileID: 0}

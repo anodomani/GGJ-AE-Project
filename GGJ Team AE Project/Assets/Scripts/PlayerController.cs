@@ -107,10 +107,13 @@ public class PlayerController : MonoBehaviour {
         if (GridReference.FinalPath.Count > 0){
             if (Input.GetMouseButtonDown(0)){
                 speedMod = Vector2.Distance(StartPosition.position, TargetPosition.position);   
-                print("speedmod " + speedMod);
+                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (worldPosition.x > StartPosition.position.x) {StartPosition.localRotation = Quaternion.Euler(0, 0, 0);}
+                else {StartPosition.localRotation = Quaternion.Euler(0, 180, 0);}
+                //print("speedmod " + speedMod);
             }
             currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, Vector2.Distance(StartPosition.position, TargetPosition.position) / (speedMod*2));
-            print("current speed " + currentSpeed);
+            //print("current speed " + currentSpeed);
             float step = currentSpeed * Time.deltaTime;
             StartPosition.position = Vector2.MoveTowards(StartPosition.position, GridReference.FinalPath[0].vPosition, step);
         }
