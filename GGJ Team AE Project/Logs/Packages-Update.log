@@ -48,3 +48,41 @@ The following packages were updated:
   com.unity.2d.pixel-perfect from version 2.0.4 to 2.1.0
   com.unity.2d.psdimporter from version 2.1.5 to 2.1.6
   com.unity.2d.spriteshape from version 3.0.13 to 3.0.14
+
+=== Sat Jan 29 17:25:17 2022
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were removed:
+  com.unity.2d.animation@3.2.16
+  com.unity.2d.ik@2.2.0-preview.1
+  com.unity.2d.pixel-perfect@2.1.0
+  com.unity.2d.psdimporter@2.1.6
+  com.unity.2d.sprite@1.0.0
+  com.unity.2d.spriteshape@3.0.14
+  com.unity.2d.tilemap@1.0.0
+
+=== Sat Jan 29 17:41:10 2022
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were removed:
+  com.unity.2d.animation@3.2.16
+  com.unity.2d.ik@2.2.0-preview.1
+  com.unity.2d.path@2.1.1
+  com.unity.2d.spriteshape@3.0.18
+  com.unity.mathematics@1.2.5
+  com.unity.postprocessing@3.0.3
+
+=== Sat Jan 29 18:04:49 2022
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were removed:
+  com.unity.2d.animation@3.2.16
+  com.unity.2d.common@2.1.0
+  com.unity.2d.ik@2.2.0-preview.1
+  com.unity.2d.spriteshape@3.0.18
