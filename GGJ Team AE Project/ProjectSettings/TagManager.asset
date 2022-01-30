@@ -44,3 +44,12 @@ TagManager:
   - name: Overlay
     uniqueID: 2993378053
     locked: 0
+  - name: Character
+    uniqueID: 169088397
+    locked: 0
+  - name: Props
+    uniqueID: 2615196413
+    locked: 0
+  - name: Player
+    uniqueID: 3906510411
+    locked: 0
