@@ -22,9 +22,9 @@ public class MoveTarget : MonoBehaviour
             {
                 print("new target at: " + worldPosition);
                 this.transform.position = new Vector3(worldPosition.x, worldPosition.y, 0);
-                pointerSprite.color = new Color(pointerSprite.color.r, pointerSprite.color.g, pointerSprite.color.b, 105);
+                pointerSprite.color = new Color(pointerSprite.color.r, pointerSprite.color.g, pointerSprite.color.b, 1);
             }
         }
-        pointerSprite.color = new Color(pointerSprite.color.r, pointerSprite.color.g, pointerSprite.color.b, pointerSprite.color.a - 1);
+        pointerSprite.color = new Color(pointerSprite.color.r, pointerSprite.color.g, pointerSprite.color.b, pointerSprite.color.a - (0.05f));
     }
 }
