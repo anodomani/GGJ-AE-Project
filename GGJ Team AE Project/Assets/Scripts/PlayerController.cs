@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-
     Grid GridReference;//For referencing the grid class
     public Transform StartPosition;//Starting position to pathfind from
     public Transform TargetPosition;//Starting position to pathfind to
+    public GameObject avatar;
+    public float speed;
 
     private void Awake()//When the program starts
     {
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     private void Update()//Every frame
     {
         FindPath(StartPosition.position, TargetPosition.position);//Find a path to the goal
+        MoveToTarget();
     }
 
     void FindPath(Vector3 a_StartPos, Vector3 a_TargetPos)
@@ -95,6 +97,15 @@ public class PlayerController : MonoBehaviour {
         int iy = Mathf.Abs(a_nodeA.iGridY - a_nodeB.iGridY);//y1-y2
 
         return ix + iy;//Return the sum
+    }
+
+    void MoveToTarget()
+    {
+        print("gridpoints in final path " + GridReference.FinalPath.Count);
+        if (GridReference.FinalPath.Count > 0){
+            float step = speed * Time.deltaTime;
+            avatar.transform.position = Vector2.Lerp(avatar.transform.position, GridReference.FinalPath[0].vPosition, step);
+        }
     }
 }
 /*

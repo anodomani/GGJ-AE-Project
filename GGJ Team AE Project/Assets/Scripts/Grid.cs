@@ -106,7 +106,7 @@ public class Grid : MonoBehaviour
     public Node NodeFromWorldPoint(Vector3 a_vWorldPos)
     {
         float ixPos = ((a_vWorldPos.x + vGridWorldSize.x / 2) / vGridWorldSize.x);
-        float iyPos = ((a_vWorldPos.z + vGridWorldSize.y / 2) / vGridWorldSize.y);
+        float iyPos = 1f - ((a_vWorldPos.y + vGridWorldSize.y / 2) / vGridWorldSize.y);
 
         ixPos = Mathf.Clamp01(ixPos);
         iyPos = Mathf.Clamp01(iyPos);
